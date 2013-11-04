@@ -22,7 +22,7 @@
 " General 基础设置
 "==========================================
 
-"set guifont=Monaco:h20          " 字体 && 字号
+set guifont=Monaco:h20          " 字体 && 字号
 
 " history存储长度。
 set history=2000
@@ -696,7 +696,7 @@ endif
 
 
 " 修改主题和颜色展示
-colorscheme solarized
+"colorscheme solarized
 set background=dark
 set t_Co=256
 
