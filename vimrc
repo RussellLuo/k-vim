@@ -13,6 +13,9 @@
 "     ->hot key  自定义快捷键
 "     ->bundle 插件管理和配置项
 "     ->colortheme 主题,及一些展示上颜色的修改
+"
+" Revision: (by RussellLuo)
+"     1. 2013-11-04  Comment out unnecessary plugins
 "==========================================
 
 "==========================================
@@ -127,20 +130,20 @@ set ttyfast
 
 
 "行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
-set relativenumber
-au FocusLost * :set number
-au FocusGained * :set relativenumber
+"set relativenumber
+"au FocusLost * :set number
+"au FocusGained * :set relativenumber
 " 插入模式下用绝对行号, 普通模式下用相对
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
+"function! NumberToggle()
+"  if(&relativenumber == 1)
+"    set number
+"  else
+"    set relativenumber
+"  endif
+"endfunc
+"nnoremap <C-n> :call NumberToggle()<cr>
 
 "create undo file
 set undolevels=1000         " How many undos
@@ -548,36 +551,37 @@ Bundle 'tomasr/molokai'
 "################### 快速移动 ###################"
 
 "更高效的移动 ,, + w/fx
-Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Lokaltog/vim-easymotion'
 
-Bundle 'vim-scripts/matchit.zip'
+"Bundle 'vim-scripts/matchit.zip'
 
 "################### 补全及快速编辑 ###################"
 
 "迄今为止用到的最好的自动VIM自动补全插件
-Bundle 'Valloric/YouCompleteMe'
+"requires Vim 7.3.584+, so not used now
+""Bundle 'Valloric/YouCompleteMe'
 "youcompleteme  默认tab  s-tab 和自动补全冲突
 "let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
+""let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
+""let g:ycm_key_list_previous_completion = ['<Up>']
 
 
 "快速插入代码片段
 "Bundle 'vim-scripts/UltiSnips'
-Bundle 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"Bundle 'SirVer/ultisnips'
+"let g:UltiSnipsExpandTrigger = "<tab>"
+"let g:UltiSnipsJumpForwardTrigger = "<tab>"
 "定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
-let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
+"let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
 
 "快速 加减注释
-Bundle 'scrooloose/nerdcommenter'
+"Bundle 'scrooloose/nerdcommenter'
 
 " 快速加入修改环绕字符
-Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-surround'
 "for repeat -> enhance surround.vim, . to repeat command
-Bundle 'tpope/vim-repeat'
+"Bundle 'tpope/vim-repeat'
 
 "自动补全单引号，双引号等
 Bundle 'Raimondi/delimitMate'
@@ -585,25 +589,25 @@ Bundle 'Raimondi/delimitMate'
 au FileType python let b:delimitMate_nesting_quotes = ['"']
 
 "for code alignment
-Bundle 'godlygeek/tabular'
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+"Bundle 'godlygeek/tabular'
+"nmap <Leader>a= :Tabularize /=<CR>
+"vmap <Leader>a= :Tabularize /=<CR>
+"nmap <Leader>a: :Tabularize /:\zs<CR>
+"vmap <Leader>a: :Tabularize /:\zs<CR>
 
 "for visual selection
-Bundle 'terryma/vim-expand-region'
-map = <Plug>(expand_region_expand)
-map - <Plug>(expand_region_shrink)
+"Bundle 'terryma/vim-expand-region'
+"map = <Plug>(expand_region_expand)
+"map - <Plug>(expand_region_shrink)
 
 "for mutil cursor
-Bundle 'terryma/vim-multiple-cursors'
-let g:multi_cursor_use_default_mapping=0
+"Bundle 'terryma/vim-multiple-cursors'
+"let g:multi_cursor_use_default_mapping=0
 " Default mapping
-let g:multi_cursor_next_key='<C-m>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
+"let g:multi_cursor_next_key='<C-m>'
+"let g:multi_cursor_prev_key='<C-p>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<Esc>'
 
 
 "################# 语法检查 ###############
@@ -631,7 +635,7 @@ Bundle 'hdima/python-syntax'
 let python_highlight_all = 1
 
 " for golang
-Bundle 'jnwhiteh/vim-golang'
+"Bundle 'jnwhiteh/vim-golang'
 
 " for markdown
 Bundle 'plasticboy/vim-markdown'
@@ -650,7 +654,7 @@ Bundle 'nono/jquery.vim'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 
 "for nginx conf file highlight.   need to confirm it works
-Bundle 'thiderman/nginx-vim-syntax'
+"Bundle 'thiderman/nginx-vim-syntax'
 
 "################### 其他 ###################"
 " task list
@@ -661,8 +665,8 @@ map <leader>td <Plug>TaskList
 Bundle 'tpope/vim-fugitive'
 
 "edit history, 可以查看回到某个历史状态
-Bundle 'sjl/gundo.vim'
-nnoremap <leader>h :GundoToggle<CR>
+"Bundle 'sjl/gundo.vim'
+"nnoremap <leader>h :GundoToggle<CR>
 
 " end turn on
 filetype plugin indent on
