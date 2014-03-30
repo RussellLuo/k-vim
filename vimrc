@@ -79,7 +79,9 @@ set tm=500
 
 "显示行号：
 set number
-set nowrap                    " 取消换行。
+set wrap                    " 自动换行
+
+set cc=79                   " 在每行的第79列显示竖线
 
 "括号配对情况
 set showmatch
@@ -114,11 +116,11 @@ set autoindent    " always set autoindenting on
 " never add copyindent, case error   " copy the previous indentation on autoindenting
 
 set tabstop=4                " 设置Tab键的宽度        [等同的空格个数]
-set shiftwidth=4  " number of spaces to use for autoindenting
-set softtabstop=4             " 按退格键时可以一次删掉 4 个空格
-set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
+"set shiftwidth=4  " number of spaces to use for autoindenting
+"set softtabstop=4             " 按退格键时可以一次删掉 4 个空格
+"set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
 
-set expandtab                " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+"set expandtab                " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 
@@ -224,7 +226,7 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc,*.class
 
 " Python 文件的一般设置，比如不要 tab 等
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType python set tabstop=4 shiftwidth=4 "expandtab ai
 
 " if this not work ,make sure .viminfo is writable for you
 if has("autocmd")
@@ -620,8 +622,12 @@ let g:syntastic_warning_symbol='>'
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_highlighting = 0
 "let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
-let g:syntastic_python_checkers=['pyflakes']
-highlight SyntasticErrorSign guifg=white guibg=black
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args="--ignore E12,E501,W293,W191"
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 6
+"highlight SyntasticErrorSign guifg=white guibg=black
 
 " python fly check, 弥补syntastic只能打开和保存才检查语法的不足
 Bundle 'kevinw/pyflakes-vim'
@@ -700,7 +706,7 @@ endif
 set background=dark
 set t_Co=256
 
-"colorscheme molokai
+colorscheme molokai
 "colorscheme desert
 
 "设置标记一列的背景颜色和数字一行颜色一致
@@ -724,3 +730,16 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" 新建Python文件后，自动填写文件头部
+function HeaderPython()
+	call setline(1, "#!/usr/bin/env python")
+	call append(1, "# -*- coding: utf-8 -*-")
+	normal G
+	normal o
+	normal o
+endf
+
+autocmd bufnewfile *.py call HeaderPython()
+
+" F10 to run python script
+nnoremap <buffer> <F10> :exec '!python' shellescape(@%, 1)<cr>
