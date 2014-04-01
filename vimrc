@@ -613,6 +613,14 @@ au FileType python let b:delimitMate_nesting_quotes = ['"']
 
 
 "################# 语法检查 ###############
+Bundle 'nvie/vim-flake8'
+let g:flake8_builtins="_,apply"
+let g:flake8_ignore="E12,E501,W293,W191"
+let g:flake8_max_line_length=79
+let g:flake8_max_complexity=10
+
+"autocmd BufWritePost *.py call Flake8()
+autocmd FileType python map <buffer> <F7> :call Flake8()<CR>
 
 " 编辑时自动语法检查标红, vim-flake8目前还不支持,所以多装一个
 " 使用pyflakes,速度比pylint快
