@@ -16,6 +16,8 @@
 "
 " Revision: (by RussellLuo)
 "     1. 2013-11-04  Comment out unnecessary plugins
+"     2. 2015-07-09  Do not set `t_Co` in vimrc
+"                    (Users should set the Terminal to xterm-256color instead)
 "==========================================
 
 "==========================================
@@ -712,7 +714,7 @@ endif
 " 修改主题和颜色展示
 "colorscheme solarized
 set background=dark
-set t_Co=256
+"set t_Co=256
 
 colorscheme molokai
 "colorscheme desert
